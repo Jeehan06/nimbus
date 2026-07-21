@@ -1,32 +1,26 @@
 import WeatherCard from "./WeatherCard";
 
-const weatherData = [
-  {
-    date: "Monday",
-    maxTemp: 31,
-    minTemp: 24,
-  },
-  {
-    date: "Tuesday",
-    maxTemp: 30,
-    minTemp: 23,
-  },
-  {
-    date: "Wednesday",
-    maxTemp: 29,
-    minTemp: 22,
-  },
-];
+type WeatherData = {
+  daily: {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+  };
+};
 
-export default function WeatherList() {
+type Props = {
+  weather: WeatherData;
+};
+
+export default function WeatherList({ weather }: Props) {
   return (
-    <section className="grid gap-6 md:grid-cols-3">
-      {weatherData.map((day) => (
+    <section className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {weather.daily.time.map((date, index) => (
         <WeatherCard
-          key={day.date}
-          date={day.date}
-          maxTemp={day.maxTemp}
-          minTemp={day.minTemp}
+          key={date}
+          date={date}
+          maxTemp={weather.daily.temperature_2m_max[index]}
+          minTemp={weather.daily.temperature_2m_min[index]}
         />
       ))}
     </section>
