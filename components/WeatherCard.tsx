@@ -9,66 +9,89 @@ export default function WeatherCard({
   maxTemp,
   minTemp,
 }: WeatherCardProps) {
-
-  let icon = "☁️";
+  let icon = "☁";
+  let accent = "text-neutral-600";
+  let weather = "Cloudy";
 
   if (maxTemp >= 32) {
-    icon = "☀️";
+    icon = "☀";
+    accent = "text-[#F04D44]";
+    weather = "Sunny";
   } else if (maxTemp >= 26) {
-    icon = "🌤️";
-  } else if (maxTemp >= 20) {
     icon = "⛅";
+    accent = "text-amber-500";
+    weather = "Partly Cloudy";
+  } else if (maxTemp >= 20) {
+    icon = "☁";
+    accent = "text-slate-500";
+    weather = "Cloudy";
   } else {
-    icon = "🌧️";
+    icon = "☂";
+    accent = "text-sky-600";
+    weather = "Rain";
   }
 
   return (
-    <div
+    <article
       className="
+        card
+        p-8
         rounded-[32px]
-        bg-white/70
-        backdrop-blur-xl
-        border border-white/70
-        shadow-xl
-        hover:shadow-sky-400/40
-        hover:scale-105
         hover:-translate-y-2
+        hover:shadow-2xl
         transition-all
         duration-300
-        p-8
       "
     >
-      <h2 className="text-xl font-bold text-gray-800 text-center">
-        {new Date(date).toLocaleDateString("en-US", {
-          weekday: "long",
-          month: "short",
-          day: "numeric",
-        })}
-      </h2>
+      <div className="flex items-start justify-between">
 
-      <div className="text-7xl text-center my-6">
-        {icon}
-      </div>
+        <div>
 
-      <div className="space-y-3 text-center">
+          <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">
+            {new Date(date).toLocaleDateString("en-US", {
+              weekday: "long",
+            })}
+          </p>
 
-        <p className="text-lg text-gray-700">
-          🌡️ High
-        </p>
+          <h3 className="mt-2 text-2xl font-bold">
+            {new Date(date).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            })}
+          </h3>
 
-        <p className="text-4xl font-bold text-sky-700">
-          {maxTemp}°C
-        </p>
+        </div>
 
-        <p className="text-lg text-gray-700 mt-4">
-          ❄️ Low
-        </p>
-
-        <p className="text-3xl font-semibold text-blue-600">
-          {minTemp}°C
-        </p>
+        <span className={`text-5xl ${accent}`}>
+          {icon}
+        </span>
 
       </div>
-    </div>
+
+      <div className="mt-10">
+
+        <p className="text-neutral-500 text-sm uppercase tracking-widest">
+          {weather}
+        </p>
+
+        <p className="mt-2 text-5xl font-black tracking-tight">
+          {Math.round(maxTemp)}°
+        </p>
+
+        <div className="mt-6 flex items-center justify-between border-t border-neutral-200 pt-4">
+
+          <span className="text-neutral-500">
+            Low
+          </span>
+
+          <span className="font-semibold text-xl">
+            {Math.round(minTemp)}°
+          </span>
+
+        </div>
+
+      </div>
+
+    </article>
   );
 }

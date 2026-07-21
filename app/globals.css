@@ -1,27 +1,104 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e0f7ff;
-  --foreground: #111827;
+  /* Colors */
+  --background: #f5f1e6;
+  --foreground: #111111;
+
+  /* Accent */
+  --accent: #f04d44;
+
+  /* Cards */
+  --card: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.08);
+
+  /* Shadow */
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* Radius */
+  --radius: 28px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  background: linear-gradient(
-    135deg,
-    #d8f3ff 0%,
-    #b8ecff 30%,
-    #8fd8ff 65%,
-    #6ec8ff 100%
-  );
+* {
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   min-height: 100vh;
-  color: #111827;
-  font-family: Arial, Helvetica, sans-serif;
+
+  margin: 0;
+
+  color: var(--foreground);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(240, 77, 68, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #f9f7f2 0%,
+      #f5f1e6 45%,
+      #efe8d7 100%
+    );
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+}
+
+.section {
+  width: min(1100px, 92%);
+  margin-inline: auto;
 }
